@@ -12,8 +12,12 @@ var score=0;
 
 var gameOver, restart;
 
+var pterodactiloS;
+
 //DESAFIO 1. Criar as variaveis de carregamento da animações em escopos diferentes
+var pterodactiloSA
 //variavel animação escopo global
+pterodactiloSA = loadAnimation("pterodactilo2.png", "pterodactilo1.png", "pterodactilo2.png", "pterodactilo3.png");
 
 
 function preload(){
@@ -35,7 +39,6 @@ function preload(){
   restartImg = loadImage("restart.png");
 
 //DESAFIO 1. CARREGAR AS ANIMAÇÕES PARA O CÓDIGO AQUI 
-
 }
 
 function setup() {
@@ -186,4 +189,14 @@ function spawnObstacles() {
 }
 
 //DESAFIO 1. CRIAR A FUNÇÃO PARA GERAR OS PTERODÁCTILOS AQUI 
+function pterodactilosF(){
+  if(frameCount % 420 === 0) {
+
+    pterodactiloS = createSprite(600, 160);
+    pterodactiloS.velocityX = -4;
+    pterodactiloS.scale = 0.8;
+  }
+
+
+}
 //criar sprite adicionar propriedades de animação, velocidade e escala.
