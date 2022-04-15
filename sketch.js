@@ -12,13 +12,9 @@ var score=0;
 
 var gameOver, restart;
 
-var pterodactiloS;
+var pterodGroup, pterod, pterodImg;
 
-//DESAFIO 1. Criar as variaveis de carregamento da animações em escopos diferentes
-var pterodactiloSA
-//variavel animação escopo global
-pterodactiloSA = loadAnimation("pterodactilo2.png", "pterodactilo1.png", "pterodactilo2.png", "pterodactilo3.png");
-
+//DESAFIO 2 criar variável de grupo para o pterodáctilo 
 
 function preload(){
   trex_running =   loadAnimation("trex1.png","trex3.png","trex4.png");
@@ -39,6 +35,8 @@ function preload(){
   restartImg = loadImage("restart.png");
 
 //DESAFIO 1. CARREGAR AS ANIMAÇÕES PARA O CÓDIGO AQUI 
+pterodImg = loadAnimation("pterodactilo1.png", "pterodactilo2.png", "pterodactilo3.png");
+
 }
 
 function setup() {
@@ -72,7 +70,8 @@ function setup() {
   
   cloudsGroup = new Group();
   obstaclesGroup = new Group();
-  
+  pterodGroup = new Group();
+
   score = 0;
 }
 
@@ -98,9 +97,11 @@ function draw() {
     }
   
     trex.collide(invisibleGround);
+
     spawnClouds();
     spawnObstacles();
-  
+    pterodactilo()
+
     if(obstaclesGroup.isTouching(trex)){
         gameState = END;
     }
@@ -120,7 +121,8 @@ function draw() {
  
     obstaclesGroup.setLifetimeEach(-1);
     cloudsGroup.setLifetimeEach(-1);
-    
+    pterodGroup.destroyEach();
+
     if(mousePressedOver(restart)) {
       reset();
     }
@@ -188,15 +190,19 @@ function spawnObstacles() {
   }
 }
 
-//DESAFIO 1. CRIAR A FUNÇÃO PARA GERAR OS PTERODÁCTILOS AQUI 
-function pterodactilosF(){
-  if(frameCount % 420 === 0) {
+//DESAFIO 1. CRIAR A FUNÇÃO 
 
-    pterodactiloS = createSprite(600, 160);
-    pterodactiloS.velocityX = -4;
-    pterodactiloS.scale = 0.8;
+function pterodactilo(){
+
+  //DESAFIO2 - CONDIÇÃO DE FRAME COUNT PARA GERAR O PTERODÁCTILO A CADA 100 QUADROS AQUI
+  if(frameCount % Math.round(random(80,100))==0){
+    pterod = createSprite(600, 20, 20, 20);
+    pterod.velocityX = -5;
+    pterod.addAnimation("pterod", pterodImg);
+    pterod.scale = 0.08;
+    pterod.y=Math.round(random(10,150));
+    pterodGroup.add(pterod);
+    pterod.lifetime = 200;
+    //pterod.depth = cloud.depth;
   }
-
-
-}
-//criar sprite adicionar propriedades de animação, velocidade e escala.
+ }
